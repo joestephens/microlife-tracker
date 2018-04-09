@@ -26,7 +26,7 @@ describe('createActivity', () => {
     createActivity(request, response);
 
     response.on('end', () => {
-      const filePath = path.join(__dirname, '../controllers', 'profile.json');
+      const filePath = path.join(__dirname, '../controllers', 'user.json');
 
       fs.readFile(filePath, 'utf8', (error, userJson) => {
         expect(response.statusCode).toEqual(200);
@@ -41,7 +41,7 @@ describe('createActivity', () => {
   });
 
   afterEach(() => {
-    const filePath = path.join(__dirname, '../controllers', 'profile.json');
+    const filePath = path.join(__dirname, '../controllers', 'user.json');
     fs.writeFileSync(filePath, '{"profile":{"activities":[]}}');
   });
 });

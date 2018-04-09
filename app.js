@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 app.post('/profile/activities', createActivity);
 
-// app.get('/profile/activities', getActivities);
+app.get('/profile/activities', getActivities);
 
 // app.get('/profile/activities/:profileActivityId', getActivities);
 
