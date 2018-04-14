@@ -10,6 +10,7 @@ const getMicrolifeAdjustment = (req, res) => {
     if (userErr) throw userErr;
 
     const activitiesJsonPath = path.join(__dirname, 'activities.json');
+
     fs.readFile(activitiesJsonPath, 'utf8', (activitiesErr, activitiesJson) => {
       if (activitiesErr) throw activitiesErr;
 
