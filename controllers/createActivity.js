@@ -10,7 +10,7 @@ const createActivity = (req, res) => {
 
     const user = JSON.parse(userJson);
 
-    const activityId = uuid()
+    const activityId = uuid();
     const activity = Object.assign({}, req.body, { _id: activityId });
     user.profile.activities.push(activity);
 

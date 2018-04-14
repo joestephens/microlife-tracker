@@ -2,14 +2,22 @@ const fs = require('fs');
 const path = require('path');
 
 const updateActivity = (req, res) => {
-  const filename = req.params.filename
-  const contents = JSON.stringify(req.body)
+  const profileActivityId = req.params.profileActivityId;
+  const userJsonPath = path.join(__dirname, 'user.json');
 
-  fs.writeFile(path.join(__dirname, 'activities', filename), contents, (err) => {
-    if (err) throw err;
+  fs.readFile(userJsonPath, 'utf8', (userErr, userJson) => {
+    const user = JSON.parse(userJson);
+    const userActivities = user.profile.activities;
+    const matchingActivity = userActivities.find(activity => activity._id === profileActivityId);
 
-    res.send({ filename: filename })
-  })
-}
+    matchingActivity.quantity = req.body.quantity;
 
-module.exports = updateActivity
+    fs.writeFile(userJsonPath, JSON.stringify(user), (err) => {
+      if (err) throw err;
+
+      res.status(200).send({ success: true });
+    });
+  });
+};
+
+module.exports = updateActivity;
